@@ -4,22 +4,13 @@
 class Calendar
   attr_accessor :month
   attr_accessor :year
-  attr_accessor :h
-  attr_reader :MONTHS
-  attr_reader :month_abbre
-  attr_reader :remonth
-  attr_reader :space
 
-
-  MONTHS = %w(January February March April May June July August September October November December)
+   MONTHS = %w(January February March April May June July August September October November December)
 
   def initialize(month, year)
     @month = month
     @year = year
-    @h = h
-    @month_abbre = month_abbre
-    @remonth = remonth
-    @space = space
+
   end
 
   def bogus_month
@@ -31,64 +22,19 @@ class Calendar
   end
 
   def convert_from_s
-    # check out .include? (month.upcase[0,3]) on the MONTHS Constant
-    if month.is_a? (String)
-      case month.upcase[0,3]
-      when "JAN"
-        remonth = 1
-      when "FEB"
-        remonth = 2
-      when "MAR"
-        remonth = 3
-      when "APR"
-        remonth = 4
-      when "MAY"
-        remonth = 5
-      when "JUN"
-        remonth = 6
-      when "JUL"
-        remonth = 7
-      when "AUG"
-        remonth = 8
-      when "SEP"
-        remonth = 9
-      when "OCT"
-        remonth = 10
-      when "NOV"
-        remonth = 11
-      when "DEC"
-        remonth = 12
+    i = 1
+    if month.size >= 3 && month.is_a?(String)
+      MONTHS.each do |name|
+        if name.upcase[0,3].match(month.upcase[0,3])
+          @m = i
+        else
+          i += 1
+        end
       end
-      remonth.to_i
     else
-      case month.to_s
-      when "1"
-        month = 1
-      when "2"
-        month = 2
-      when "3"
-        month = 3
-      when "4"
-        month = 4
-      when "5"
-        month = 5
-      when "6"
-        month = 6
-      when "7"
-        month = 7
-      when "8"
-        month = 8
-      when "9"
-        month = 9
-      when "10"
-        month = 10
-      when "11"
-        month = 11
-      when "12"
-        month = 12
-      end
-      month.to_i
+      @m = month
     end
+    @m
   end
 
   def month_to_s
@@ -185,11 +131,7 @@ class Calendar
 
   def print_calendar
     puts month_year_header
-    #puts "\n"
     puts "Su Mo Tu We Th Fr Sa"
     format_calendar
   end
-
-
-
 end

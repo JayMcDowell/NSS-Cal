@@ -3,6 +3,5 @@ require './cal.rb'
 month = ARGV[0]
 year = ARGV[1]
 
-cal = Calendar.new(month, year)
+Calendar.new(month, year).print_calendar
 
-cal.print_calendar
